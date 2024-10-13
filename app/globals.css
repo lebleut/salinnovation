@@ -25,3 +25,9 @@ body {
     text-wrap: balance;
   }
 }
+
+@media (prefers-color-scheme: dark) {
+  .logo {
+    filter: invert(1);
+  }
+}

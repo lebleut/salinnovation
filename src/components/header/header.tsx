@@ -7,7 +7,7 @@ function Header() {
         <Box component={"header"} py={2}>
             <Stack direction={"row"} alignItems={"center"} justifyContent={"space-between"}>
                 <Link href="/">
-                    <img src={logo.src} alt="SALI Innovation" width={"80px"} />
+                    <img className="logo" src={logo.src} alt="SALI Innovation" width={"80px"} />
                 </Link>
                 {/* Navigation */}
 
