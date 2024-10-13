@@ -1,11 +1,14 @@
 import { Box, Stack, Typography } from "@mui/material";
 import Link from "next/link";
+import logo from "../../../public/images/logo.png";
 
 function Header() {
     return (
         <Box component={"header"} py={2}>
             <Stack direction={"row"} alignItems={"center"} justifyContent={"space-between"}>
-                <Typography variant="h6">SALI Innovation</Typography>
+                <Link href="/">
+                    <img src={logo.src} alt="SALI Innovation" width={"80px"} />
+                </Link>
                 {/* Navigation */}
 
                 <Stack direction={"row"} spacing={2}>

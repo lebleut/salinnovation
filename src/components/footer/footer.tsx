@@ -1,7 +1,11 @@
+import { Box, Typography } from "@mui/material";
+
 function Footer() {
     return (
         <footer>
-            <p>{"\u00A9"} All rights reserved by SALI Innovation 2024</p>
+            <Box textAlign={"center"}>
+                <Typography>{"\u00A9"} All rights reserved by SALI Innovation 2024</Typography>
+            </Box>
         </footer>
     );
 }
