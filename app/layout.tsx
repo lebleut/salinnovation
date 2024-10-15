@@ -38,6 +38,20 @@ export default function RootLayout({
     };
     return (
         <html lang="en">
+            <head>
+                <script async src={`https://www.googletagmanager.com/gtag/js?id=G-KP2TV9NQZH`} />
+                <script
+                    dangerouslySetInnerHTML={{
+                        __html: `
+                        window.dataLayer = window.dataLayer || [];
+                        function gtag(){dataLayer.push(arguments);}
+                        gtag('js', new Date());
+
+                        gtag('config', 'G-KP2TV9NQZH');
+                        `,
+                    }}
+                />
+            </head>
             <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
                 <Stack direction={"column"} spacing={2} minHeight={"100vh"} justifyContent={"space-between"} sx={mainStyle}>
                     <Stack direction={"column"} spacing={4}>
