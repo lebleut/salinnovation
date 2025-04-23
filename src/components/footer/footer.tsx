@@ -4,7 +4,9 @@ function Footer() {
     return (
         <footer>
             <Box textAlign={"center"}>
-                <Typography>{"\u00A9"} All rights reserved by SALI Innovation 2024</Typography>
+                <Typography>
+                    {"\u00A9"} All rights reserved by SALI Innovation {new Date().getFullYear()}
+                </Typography>
             </Box>
         </footer>
     );
