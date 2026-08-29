@@ -8,6 +8,8 @@ import "./globals.css";
 import { Box, Divider, Stack, SxProps } from "@mui/material";
 import Header from "@/src/components/header/header";
 import Footer from "@/src/components/footer/footer";
+import { Analytics } from "@vercel/analytics/next"
+
 
 const geistSans = localFont({
     src: "./fonts/GeistVF.woff",
@@ -64,6 +66,7 @@ export default function RootLayout({
                     </Stack>
                     <Footer />
                 </Stack>
+                <Analytics />
             </body>
         </html>
     );
