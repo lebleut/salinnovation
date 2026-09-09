@@ -27,11 +27,24 @@ function Products() {
                 }}
             >
                 <Stack spacing={3}>
-                    <Stack direction="row" alignItems="center" spacing={1.5} flexWrap="wrap" useFlexGap>
+                    <Stack spacing={1}>
                         <Typography variant="h4" fontWeight={400}>
                             LoolyTv
                         </Typography>
-                        <Chip label="Android" size="small" variant="outlined" sx={{ fontWeight: 300 }} />
+                        <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
+                            {["Application", "Kids", "Education"].map((tag) => (
+                                <Chip
+                                    key={tag}
+                                    label={tag}
+                                    size="small"
+                                    sx={{
+                                        fontWeight: 300,
+                                        bgcolor: "action.hover",
+                                        color: "text.secondary",
+                                    }}
+                                />
+                            ))}
+                        </Stack>
                     </Stack>
 
                     <Typography color="text.secondary" fontWeight={300} lineHeight={1.7} maxWidth="36rem">
