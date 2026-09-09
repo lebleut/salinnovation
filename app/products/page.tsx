@@ -59,6 +59,7 @@ function Products() {
                             rel="noopener noreferrer"
                             underline="hover"
                             fontWeight={400}
+                            color="primary"
                         >
                             loolytv.com →
                         </Link>
@@ -75,9 +76,9 @@ function Products() {
                                 borderRadius: 1,
                                 border: "1px solid",
                                 borderColor: "divider",
-                                color: "text.disabled",
+                                color: "text.secondary",
                                 cursor: "not-allowed",
-                                opacity: 0.55,
+                                opacity: 0.7,
                                 userSelect: "none",
                                 width: "fit-content",
                             }}

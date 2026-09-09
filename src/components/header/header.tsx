@@ -1,16 +1,42 @@
+"use client";
+
 import { Box, Link as MuiLink, Stack } from "@mui/material";
 import NextLink from "next/link";
+import { usePathname } from "next/navigation";
 import logo from "../../../public/images/logo.png";
 
-const navLinkSx = {
-    color: "inherit",
-    fontWeight: 400,
-    "&:hover": {
-        color: "text.secondary",
-    },
-};
+const navItems = [
+    { href: "/", label: "Home", exact: true },
+    { href: "/products", label: "Products" },
+    { href: "/contact-us", label: "Contact Us" },
+];
+
+function isNavActive(pathname: string, href: string, exact?: boolean) {
+    if (exact) {
+        return pathname === href;
+    }
+
+    return pathname === href || pathname.startsWith(`${href}/`);
+}
+
+function getNavLinkSx(active: boolean) {
+    return {
+        color: "inherit",
+        fontWeight: active ? 600 : 400,
+        opacity: active ? 1 : 0.72,
+        pb: 0.25,
+        borderBottom: "2px solid",
+        borderColor: active ? "currentColor" : "transparent",
+        transition: "opacity 0.2s ease, border-color 0.2s ease",
+        "&:hover": {
+            opacity: 1,
+        },
+    };
+}
 
 function Header() {
+    const pathname = usePathname();
+
     return (
         <Box component={"header"} py={2}>
             <Stack direction={"row"} alignItems={"center"} justifyContent={"space-between"}>
@@ -19,15 +45,22 @@ function Header() {
                 </NextLink>
 
                 <Stack direction={"row"} spacing={2}>
-                    <MuiLink component={NextLink} href="/" underline="none" sx={navLinkSx}>
-                        Home
-                    </MuiLink>
-                    <MuiLink component={NextLink} href="/products" underline="none" sx={navLinkSx}>
-                        Products
-                    </MuiLink>
-                    <MuiLink component={NextLink} href="/contact-us" underline="none" sx={navLinkSx}>
-                        Contact Us
-                    </MuiLink>
+                    {navItems.map(({ href, label, exact }) => {
+                        const active = isNavActive(pathname ?? "", href, exact);
+
+                        return (
+                            <MuiLink
+                                key={href}
+                                component={NextLink}
+                                href={href}
+                                underline="none"
+                                sx={getNavLinkSx(active)}
+                                aria-current={active ? "page" : undefined}
+                            >
+                                {label}
+                            </MuiLink>
+                        );
+                    })}
                 </Stack>
             </Stack>
         </Box>

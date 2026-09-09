@@ -8,6 +8,7 @@ import "./globals.css";
 import { Box, Divider, Stack, SxProps } from "@mui/material";
 import Header from "@/src/components/header/header";
 import Footer from "@/src/components/footer/footer";
+import AppThemeProvider from "@/src/components/theme/theme-provider";
 import { Analytics } from "@vercel/analytics/next"
 
 
@@ -55,17 +56,19 @@ export default function RootLayout({
                 />
             </head>
             <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-                <Stack direction={"column"} spacing={2} minHeight={"100vh"} justifyContent={"space-between"} sx={mainStyle}>
-                    <Stack direction={"column"} spacing={4}>
-                        <Box>
-                            <Header />
-                            <Divider orientation="horizontal" flexItem />
-                        </Box>
+                <AppThemeProvider>
+                    <Stack direction={"column"} spacing={2} minHeight={"100vh"} justifyContent={"space-between"} sx={mainStyle}>
+                        <Stack direction={"column"} spacing={4}>
+                            <Box>
+                                <Header />
+                                <Divider orientation="horizontal" flexItem />
+                            </Box>
 
-                        <Box>{children}</Box>
+                            <Box>{children}</Box>
+                        </Stack>
+                        <Footer />
                     </Stack>
-                    <Footer />
-                </Stack>
+                </AppThemeProvider>
                 <Analytics />
             </body>
         </html>
