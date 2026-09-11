@@ -1,3 +1,4 @@
+import { verifyRecaptchaToken } from "@/src/lib/recaptcha";
 import { Resend } from "resend";
 import { NextResponse } from "next/server";
 
@@ -9,6 +10,7 @@ type ContactPayload = {
     subject?: string;
     message?: string;
     company?: string;
+    recaptchaToken?: string;
 };
 
 function isValidEmail(email: string) {
@@ -48,6 +50,18 @@ export async function POST(request: Request) {
 
     if (company) {
         return NextResponse.json({ success: true });
+    }
+
+    const recaptchaToken = body.recaptchaToken?.trim() ?? "";
+
+    if (!recaptchaToken) {
+        return NextResponse.json({ error: "Recaptcha verification failed." }, { status: 400 });
+    }
+
+    const recaptcha = await verifyRecaptchaToken(recaptchaToken);
+
+    if (!recaptcha.ok) {
+        return NextResponse.json({ error: recaptcha.error }, { status: 403 });
     }
 
     if (!name || name.length < 2 || name.length > 100) {

@@ -1,4 +1,4 @@
-import ContactForm from "@/src/components/contact/contact-form";
+import ContactFormWrapper from "@/src/components/contact/contact-form-wrapper";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 };
 
 function ContactUs() {
-    return <ContactForm />;
+    return <ContactFormWrapper />;
 }
 
 export default ContactUs;

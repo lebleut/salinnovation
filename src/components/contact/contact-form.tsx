@@ -27,7 +27,12 @@ const initialFormState: FormState = {
     company: "",
 };
 
-function ContactForm() {
+type ContactFormProps = {
+    recaptchaReady: boolean;
+    getRecaptchaToken: () => Promise<string>;
+};
+
+function ContactForm({ recaptchaReady, getRecaptchaToken }: ContactFormProps) {
     const [form, setForm] = useState<FormState>(initialFormState);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [feedback, setFeedback] = useState<{ type: "success" | "error"; message: string } | null>(null);
@@ -45,10 +50,12 @@ function ContactForm() {
         setFeedback(null);
 
         try {
+            const recaptchaToken = await getRecaptchaToken();
+
             const response = await fetch("/api/contact", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(form),
+                body: JSON.stringify({ ...form, recaptchaToken }),
             });
 
             const data = (await response.json()) as { error?: string; success?: boolean };
@@ -170,16 +177,42 @@ function ContactForm() {
                     </Box>
                 </Stack>
 
-                <Box>
-                    <Button
-                        type="submit"
-                        variant="contained"
-                        disabled={isSubmitting}
-                        sx={{ minWidth: 160, fontWeight: 500 }}
-                    >
-                        {isSubmitting ? <CircularProgress size={22} color="inherit" /> : "Send message"}
-                    </Button>
-                </Box>
+                <Stack spacing={1.5}>
+                    <Box>
+                        <Button
+                            type="submit"
+                            variant="contained"
+                            disabled={isSubmitting || !recaptchaReady}
+                            sx={{ minWidth: 160, fontWeight: 500 }}
+                        >
+                            {isSubmitting ? <CircularProgress size={22} color="inherit" /> : "Send message"}
+                        </Button>
+                    </Box>
+
+                    <Typography variant="caption" color="text.secondary" fontWeight={300} lineHeight={1.5}>
+                        This site is protected by reCAPTCHA and the Google{" "}
+                        <Box
+                            component="a"
+                            href="https://policies.google.com/privacy"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            sx={{ color: "inherit", textDecoration: "underline" }}
+                        >
+                            Privacy Policy
+                        </Box>{" "}
+                        and{" "}
+                        <Box
+                            component="a"
+                            href="https://policies.google.com/terms"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            sx={{ color: "inherit", textDecoration: "underline" }}
+                        >
+                            Terms of Service
+                        </Box>{" "}
+                        apply.
+                    </Typography>
+                </Stack>
             </Stack>
         </Box>
     );
