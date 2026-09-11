@@ -1,16 +1,13 @@
-import { Link, Stack, Typography } from "@mui/material";
+import ContactForm from "@/src/components/contact/contact-form";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Contact Us | SALI Innovation",
+    description: "Get in touch with SALI Innovation.",
+};
 
 function ContactUs() {
-    return (
-        <>
-            <Stack>
-                <Stack direction={"row"}>
-                    <Typography>Email :</Typography>
-                    <Link href="mailto:jamel@salinnovation.com">jamel@salinnovation.com</Link>
-                </Stack>
-            </Stack>
-        </>
-    );
+    return <ContactForm />;
 }
 
 export default ContactUs;
