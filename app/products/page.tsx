@@ -32,7 +32,7 @@ function Products() {
                             LoolyTv
                         </Typography>
                         <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
-                            {["Application", "Kids", "Education"].map((tag) => (
+                            {["Application", "Kids", "Education", "TV"].map((tag) => (
                                 <Chip
                                     key={tag}
                                     label={tag}
