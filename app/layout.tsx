@@ -34,7 +34,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     const mainStyle: SxProps = {
-        maxWidth: "800px",
+        maxWidth: "1200px",
         marginRight: "auto",
         marginLeft: "auto",
         p: "0rem 1rem 1rem 1rem",
@@ -58,7 +58,7 @@ export default function RootLayout({
             <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
                 <AppThemeProvider>
                     <Stack direction={"column"} spacing={2} minHeight={"100vh"} justifyContent={"space-between"} sx={mainStyle}>
-                        <Stack direction={"column"} spacing={4}>
+                        <Stack direction={"column"} spacing={0}>
                             <Box>
                                 <Header />
                                 <Divider orientation="horizontal" flexItem />
